@@ -12,7 +12,7 @@ namespace CurrencyAPI.Controllers
         CalcCurrencyService calcCurrencyService = new CalcCurrencyService();
         GetCurrency getCurrency = new GetCurrency();
 
-        [HttpGet("GetCurrencyValues"]
+        [HttpGet("GetCurrencyValues")]
         public IEnumerable<CalcCurrencyModel> GetListOfCurrency()
         {
             return getCurrency.GetCurrencyValue();
