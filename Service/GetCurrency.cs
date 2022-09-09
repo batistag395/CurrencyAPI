@@ -2,11 +2,18 @@
 
 namespace CurrencyAPI.Service
 {
-
     public class GetCurrency
     {
         CalcCurrencyModel currencyModel;
-        public List<CalcCurrencyModel> CurrencyList { get; set; } = new List<CalcCurrencyModel>();
+
+        public List<CalcCurrencyModel> CurrencyList = new();
+
+        private static GetCurrency instance;
+        private GetCurrency()
+        {
+
+        }
+
 
         public IEnumerable<CalcCurrencyModel> GetCurrencyValue()
         {
@@ -19,5 +26,17 @@ namespace CurrencyAPI.Service
             }
             return CurrencyList.ToList(); ;
         }
+        public static GetCurrency Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new GetCurrency();
+                }
+                return instance;
+            }
+        }
     }
 }
+

@@ -9,9 +9,5 @@
             Name = name;
             Rate = rate;
         }
-        public override string ToString()
-        {
-            return Name + " " + Rate;
-        }
     }
 }

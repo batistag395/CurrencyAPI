@@ -10,18 +10,16 @@ namespace CurrencyAPI.Controllers
     public class CalcCurrencyController : ControllerBase
     {
         CalcCurrencyService calcCurrencyService = new CalcCurrencyService();
-        GetCurrency getCurrency = new GetCurrency();
 
         [HttpGet("GetCurrencyValues")]
-        public IEnumerable<CalcCurrencyModel> GetListOfCurrency()
+        public IResult GetCurrencyList()
         {
-            return getCurrency.GetCurrencyValue();
+            return Results.Ok(GetCurrency.Instance.GetCurrencyValue()) ;
         }
-
-        [HttpPost("CalcCurrency")]
-        public double CalcCurrency(string MoedaEntrada, string MoedaSaida, double valor1)
+        [HttpPost("CalculateCurrency")]
+        public IResult CalcCurrency(string MoedaEntrada, string MoedaSaida, double valor1)
         {
-            return calcCurrencyService.CalcCurrency(MoedaEntrada, MoedaSaida, valor1);
+            return Results.Ok(calcCurrencyService.CalcCurrency(MoedaEntrada, MoedaSaida, valor1));
         }
     }
 }
