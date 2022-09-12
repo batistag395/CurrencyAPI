@@ -13,29 +13,35 @@ namespace CurrencyAPI.Controllers
         AddNewCurrencyService addNewCurremcy = new();
         UpdateCurrencyService updateCurrencyService = new();
         DeleteCurrencyService deleteCurrencyService = new();
+        GetCurrencyByIdService getCurrencyByIdService = new();
 
-        [HttpGet("GetCurrencyValues")]
+        [HttpGet("{id}")]
+        public IResult GetCurrencyById(int id)
+        {
+            return Results.Ok(getCurrencyByIdService.GetCureencyById(id));
+        }
+        [HttpGet("GetListOfCurrency")]
         public IResult GetCurrencyList()
         {
-            return Results.Ok(GetCurrency.Instance.GetCurrencyValue()) ;
+            return Results.Ok(GetCurrency.Instance.GetCurrencyValue());
         }
         [HttpPost("CalculateCurrency")]
-        public IResult CalcCurrency(string MoedaEntrada, string MoedaSaida, double valor1)
+        public IResult CalcCurrency(string Name, string Name2, double Rate)
         {
-            return Results.Ok(calcCurrencyService.CalcCurrency(MoedaEntrada, MoedaSaida, valor1));
+            return Results.Ok(calcCurrencyService.CalcCurrency(Name, Name2, Rate));
         }
         [HttpPost("AddNewCurrency")]
-        public void AddCurrency(string Nome, double Rate)
+        public void AddNewCurrency(int Id, string Name, double Rate)
         {
-           addNewCurremcy.AddVNewCurrency(Nome, Rate);
+            addNewCurremcy.AddVNewCurrency(Id, Name, Rate);
         }
-        [HttpPost("UpdateCurrency")]
-        public void UpdateCurrency(string Nane, string NewName, double Value)
+        [HttpPut("UpdateACurrency")]
+        public void UpdateACurrency(string Name, string NewName, double Value)
         {
-            updateCurrencyService.UpdateCurrency(Nane, NewName, Value);
+            updateCurrencyService.UpdateCurrency(Name, NewName, Value);
         }
-        [HttpPost("DeleteCurrency")]
-        public void DeleteCurrency(string Name)
+        [HttpDelete("DeleteACurrency")]
+        public void DeleteACurrency(string Name)
         {
             deleteCurrencyService.DeleteCurrency(Name);
         }
