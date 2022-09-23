@@ -12,5 +12,9 @@
             Name = name;
             Rate = rate;
         }
+
+        public CalcCurrencyModel()
+        {
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace CurrencyAPI.Controllers
         [HttpGet("GetListOfCurrency")]
         public IResult GetCurrencyList()
         {
-            return Results.Ok(GetCurrency.Instance.GetCurrencyValue());
+            return Results.Ok(GetCurrency.Instance.GetCurrencyValue()); ; ;
         }
         [HttpPost("CalculateCurrency")]
         public IResult CalcCurrency(string Name, string Name2, double Rate)

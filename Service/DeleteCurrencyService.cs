@@ -7,7 +7,7 @@ namespace CurrencyAPI.Service
         public void DeleteCurrency(string Name)
         {
             CalcCurrencyModel currency = GetCurrency.Instance.CurrencyList.FirstOrDefault(x => x.Name == (Name));
-            GetCurrency.Instance. CurrencyList.Remove(currency);
+            GetCurrency.Instance.CurrencyList.Remove(currency);
         }
     }
 }

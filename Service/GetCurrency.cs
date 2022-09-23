@@ -4,26 +4,36 @@ namespace CurrencyAPI.Service
 {
     public class GetCurrency
     {
-        CalcCurrencyModel currencyModel;
-
-        public List<CalcCurrencyModel> CurrencyList { get; set; } = new();
-
         private static GetCurrency instance;
+        public List<CalcCurrencyModel> CurrencyList { get; set; } = new();
         private GetCurrency()
         {
-
         }
         public IEnumerable<CalcCurrencyModel> GetCurrencyValue()
         {
+            return CurrencyList.ToList();
+        }
+
+        public void InitializeObjects()
+        {
             string[] text = System.IO.File.ReadAllLines(@"C:\Users\gorde\Desktop\Projetos C#\treinamento pericles\ConversaoDeMoedas\moedas.txt");
+            CurrencyList = new List<CalcCurrencyModel>();
+
             foreach (string line in text)
             {
                 string[] vect = line.Split(' ');
-                currencyModel = new CalcCurrencyModel(int.Parse(vect[0]), vect[1], double.Parse(vect[2]));
-                CurrencyList.Add(currencyModel);
+
+                CurrencyList.Add(new CalcCurrencyModel
+                {
+                    Id = int.Parse(vect[0]),
+                    Name = vect[1],
+                    Rate = double.Parse(vect[2])
+                });
+
             }
-            return CurrencyList.ToList();
+
         }
+
         public static GetCurrency Instance
         {
             get
@@ -31,6 +41,7 @@ namespace CurrencyAPI.Service
                 if (instance == null)
                 {
                     instance = new GetCurrency();
+                    instance.InitializeObjects();
                 }
                 return instance;
             }
